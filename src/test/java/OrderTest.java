@@ -1,7 +1,6 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
 
@@ -40,7 +39,7 @@ public class OrderTest extends BaseTest {
     }
 
     @Parameterized.Parameters
-    public static Object[][] OrderWithFirstOrderButton() {
+    public static Object[][] getTestData() {
         return new Object[][]{
                 {
                         "Гарри",
@@ -69,7 +68,7 @@ public class OrderTest extends BaseTest {
 
 
     @Test
-    public void OrderWithFirstOrderButtonTest() {
+    public void orderWithFirstOrderButtonTest() {
         mainPage.openPage();
         mainPage.clickConfirmCookieButton();
         mainPage.clickFirstOrderButton();
@@ -84,12 +83,11 @@ public class OrderTest extends BaseTest {
         orderPage.setColour(colour);
         orderPage.clickOrderButton();
         orderPage.clickConfirmButton();
-        WebElement successfulOrderWindow = orderPage.getWebElement();
-        assertTrue("Заказ не оформился", successfulOrderWindow.getText().contains("Заказ оформлен"));
+        assertTrue("Заказ не оформился", orderPage.getSuccessOrderText().contains("Заказ оформлен"));
     }
 
     @Test
-    public void OrderWithSecondOrderButtonTest() {
+    public void orderWithSecondOrderButtonTest() {
         mainPage.openPage();
         mainPage.clickConfirmCookieButton();
         mainPage.clickSecondOrderButton();
@@ -104,8 +102,7 @@ public class OrderTest extends BaseTest {
         orderPage.setColour(colour);
         orderPage.clickOrderButton();
         orderPage.clickConfirmButton();
-        WebElement successfulOrderWindow = orderPage.getWebElement();
-        assertTrue("Заказ не оформился", successfulOrderWindow.getText().contains("Заказ оформлен"));
+        assertTrue("Заказ не оформился", orderPage.getSuccessOrderText().contains("Заказ оформлен"));
     }
 
 }

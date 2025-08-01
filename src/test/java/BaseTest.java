@@ -1,6 +1,6 @@
-import Page.FaqPage;
-import Page.MainPage;
-import Page.OrderPage;
+import page.FaqPage;
+import page.MainPage;
+import page.OrderPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +11,7 @@ public class BaseTest {
     WebDriver driver;
     MainPage mainPage;
     OrderPage orderPage;
-    FaqPage faqPage;
+    static FaqPage faqPage;
 
 
     @Before

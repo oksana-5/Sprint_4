@@ -1,35 +1,41 @@
-package Page;
+package page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class OrderPage {
     private WebDriver driver;
     // Кнопка согласия на использование cookie
-    private By confirmButton = By.xpath(".//button[text()='Да']");
+    private final By confirmButton = By.xpath(".//button[text()='Да']");
     // Кнопка "Заказать"
-    private By orderButton = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[text()='Заказать']");
+    private final By orderButton = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[text()='Заказать']");
     // Поле "Срок аренды"
-    private By numberOfDausField = By.className("Dropdown-placeholder");
+    private final By numberOfDaysField = By.className("Dropdown-placeholder");
     // Поле "Когда привезти самокат"
-    private By dataField = By.cssSelector("input[placeholder='* Когда привезти самокат']");
+    private final By dataField = By.cssSelector("input[placeholder='* Когда привезти самокат']");
     // Кнопка "Далее"
-    private By nextButton = By.xpath(".//button[text()='Далее']");
+    private final By nextButton = By.xpath(".//button[text()='Далее']");
     // Поле "Телефон: на него позвонит курьер"
-    private By phoneNumberField = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
+    private final By phoneNumberField = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
     // Поле "Станция метро"
-    private By subwayStationField = By.cssSelector("input[placeholder='* Станция метро']");
+    private final By subwayStationField = By.cssSelector("input[placeholder='* Станция метро']");
     // Выбранная станция метро
-    private By selectedSubwayStation = By.xpath(".//div[@class='select-search__select']");
+    private final By selectedSubwayStation = By.xpath(".//div[@class='select-search__select']");
     // Поле "Адрес: куда привезти заказ"
-    private By addressField = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
+    private final By addressField = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
     // Поле "Фамилия"
-    private By surnameField = By.cssSelector("input[placeholder='* Фамилия']");
+    private final By surnameField = By.cssSelector("input[placeholder='* Фамилия']");
     // Поле "Имя"
-    private By nameField = By.cssSelector("input[placeholder='* Имя']");
+    private final By nameField = By.cssSelector("input[placeholder='* Имя']");
     // Окно успешного оформления заказа
-    private By successfulOrder = By.xpath(".//div[contains(text(), 'Заказ оформлен')]");
+    private final By successfulOrder = By.xpath(".//div[contains(text(), 'Заказ оформлен')]");
+    // Поле "Цвет самоката"
+    private final String colourCheckboxTemplate = ".//input[@id='%s']";
+    // Выбор количества дней
+    private final String numberOfDaysOptionTemplate = ".//div[text()='%s']";
+    // Выбор даты
+    private final String datePickerDayTemplate = ".//div[@aria-label='Choose %s']";
+
 
 
     public OrderPage(WebDriver driver) {
@@ -45,20 +51,20 @@ public class OrderPage {
     }
 
     public void setColour(String colour) {
-        By colourField = By.xpath(".//input[@id='" + colour + "']");
-        driver.findElement(colourField).click();
+        By colourLocator = By.xpath(String.format(colourCheckboxTemplate, colour));
+        driver.findElement(colourLocator).click();
     }
 
     public void setNumberOfDays(String numberOfDays) {
-        driver.findElement(numberOfDausField).click();
-        By sevenDaysDropDown = By.xpath(".//div[text()='" + numberOfDays + "']");
-        driver.findElement(sevenDaysDropDown).click();
+        driver.findElement(numberOfDaysField).click();
+        By daysLocator = By.xpath(String.format(numberOfDaysOptionTemplate, numberOfDays));
+        driver.findElement(daysLocator).click();
     }
 
     public void setData(String data, String dayOfTheWeekAndData) {
         driver.findElement(dataField).sendKeys(data);
-        By dataAndDayOfTheWeek = By.xpath(".//div[@aria-label='Choose " + dayOfTheWeekAndData + "']");
-        driver.findElement(dataAndDayOfTheWeek).click();
+        By dateLocator = By.xpath(String.format(datePickerDayTemplate, dayOfTheWeekAndData));
+        driver.findElement(dateLocator).click();
     }
 
     public void clickNextButton() {
@@ -87,7 +93,7 @@ public class OrderPage {
         driver.findElement(nameField).sendKeys(name);
     }
 
-    public WebElement getWebElement() {
-        return driver.findElement(successfulOrder);
+    public String getSuccessOrderText() {
+        return driver.findElement(successfulOrder).getText();
     }
 }
