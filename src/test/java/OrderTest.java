@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -66,44 +67,44 @@ public class OrderTest extends BaseTest {
         };
     }
 
-
     @Test
+    @DisplayName("Тест проверяет оформление заказа при нажатии на первую кнопку оформления заказа")
     public void orderWithFirstOrderButtonTest() {
-        mainPage.openPage();
-        mainPage.clickConfirmCookieButton();
-        mainPage.clickFirstOrderButton();
-        orderPage.setName(name);
-        orderPage.setSurname(surname);
-        orderPage.setAddress(address);
-        orderPage.setSubwayStation(subwayStation);
-        orderPage.setPhoneNumber(phoneNumber);
-        orderPage.clickNextButton();
-        orderPage.setData(data, dayOfTheWeekAndData);
-        orderPage.setNumberOfDays(numberOfDays);
-        orderPage.setColour(colour);
-        orderPage.clickOrderButton();
-        orderPage.clickConfirmButton();
-        assertTrue("Заказ не оформился", orderPage.getSuccessOrderText().contains("Заказ оформлен"));
+        mainPage.openPage()
+                .clickConfirmCookieButton()
+                .clickFirstOrderButton();
+        orderPage.setName(name)
+                .setSurname(surname)
+                .setAddress(address)
+                .setSubwayStation(subwayStation)
+                .setPhoneNumber(phoneNumber)
+                .clickNextButton()
+                .setData(data, dayOfTheWeekAndData)
+                .setNumberOfDays(numberOfDays)
+                .setColour(colour)
+                .clickOrderButton()
+                .clickConfirmButton();
+        assertTrue("Заказ не оформился", orderPage.getSuccessOrderText().contains("Хотите оформить заказ"));
     }
 
     @Test
+    @DisplayName("Тест проверяет оформление заказа при нажатии на вторую кнопку оформления заказа")
     public void orderWithSecondOrderButtonTest() {
-        mainPage.openPage();
-        mainPage.clickConfirmCookieButton();
-        mainPage.clickSecondOrderButton();
-        orderPage.setName(name);
-        orderPage.setSurname(surname);
-        orderPage.setAddress(address);
-        orderPage.setSubwayStation(subwayStation);
-        orderPage.setPhoneNumber(phoneNumber);
-        orderPage.clickNextButton();
-        orderPage.setData(data, dayOfTheWeekAndData);
-        orderPage.setNumberOfDays(numberOfDays);
-        orderPage.setColour(colour);
-        orderPage.clickOrderButton();
-        orderPage.clickConfirmButton();
-        assertTrue("Заказ не оформился", orderPage.getSuccessOrderText().contains("Заказ оформлен"));
+        mainPage.openPage()
+                .clickConfirmCookieButton()
+                .clickSecondOrderButton();
+        orderPage.setName(name)
+                .setSurname(surname)
+                .setAddress(address)
+                .setSubwayStation(subwayStation)
+                .setPhoneNumber(phoneNumber)
+                .clickNextButton()
+                .setData(data, dayOfTheWeekAndData)
+                .setNumberOfDays(numberOfDays)
+                .setColour(colour)
+                .clickOrderButton()
+                .clickConfirmButton();
+        assertTrue("Заказ не оформился", orderPage.getSuccessOrderText().contains("Хотите оформить заказ"));
     }
-
 }
 

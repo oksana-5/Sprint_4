@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -31,14 +32,14 @@ public class FaqTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Тест проверяет текст вопросов и ответов в разделе FAQ")
     public void faqTest() {
-        faqPage.openPage();
-        faqPage.clickConfirmCookieButton();
-        String actualQuestion = faqPage.getQuestionText(questionIndex);
-        assertEquals("Текст вопроса неверный", expectedQuestion, actualQuestion);
+        faqPage.openPage()
+                .clickConfirmCookieButton();
+        assertEquals("Текст вопроса неверный", expectedQuestion, faqPage.getQuestionText(questionIndex));
+
         faqPage.clickQuestion(questionIndex);
-        String actualAnswer = faqPage.getAnswerText(questionIndex);
-        assertEquals("Текст ответа неверный", expectedAnswer, actualAnswer);
+        assertEquals("Текст ответа неверный", expectedAnswer, faqPage.getAnswerText(questionIndex));
     }
 }
 
