@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,20 +18,28 @@ public class MainPage {
         this.driver = driver;
     }
 
-    public void openPage() {
+    @Step("Открываем страницу")
+    public MainPage openPage() {
         driver.get(URL);
+        return this;
     }
 
-    public void clickConfirmCookieButton() {
+    @Step("Нажимаем на кнопку согласия с использованием cookies")
+    public MainPage clickConfirmCookieButton() {
         driver.findElement(confirmCookieButton).click();
+        return this;
     }
 
-    public void clickFirstOrderButton() {
+    @Step("Нажимаем на первую кнопку оформления заказа")
+    public MainPage clickFirstOrderButton() {
         driver.findElement(firstOrderButton).click();
+        return this;
     }
 
-    public void clickSecondOrderButton() {
+    @Step("Нажимаем на вторую кнопку оформления заказа")
+    public MainPage clickSecondOrderButton() {
         driver.findElement(secondOrderButton).click();
+        return this;
     }
 }
 

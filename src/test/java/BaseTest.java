@@ -1,11 +1,11 @@
-import page.FaqPage;
-import page.MainPage;
-import page.OrderPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import page.FaqPage;
+import page.MainPage;
+import page.OrderPage;
 
 public class BaseTest {
     WebDriver driver;
@@ -16,6 +16,8 @@ public class BaseTest {
 
     @Before
     public void startUp() {
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless=new");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         mainPage = new MainPage(driver);

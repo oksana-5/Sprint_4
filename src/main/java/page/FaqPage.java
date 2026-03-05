@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,24 +22,31 @@ public class FaqPage {
         this.driver = driver;
     }
 
-    public void openPage() {
+    public FaqPage openPage() {
         driver.get(URL);
+        return this;
     }
 
-    public void clickConfirmCookieButton() {
+    @Step("Нажимаем на кнопку согласия с использованием cookies")
+    public FaqPage clickConfirmCookieButton() {
         driver.findElement(CONFIRM_COOKIE_BUTTON).click();
+        return this;
     }
 
-    public void clickQuestion(int questionIndex) {
+    @Step("Нажимаем на вопрос")
+    public FaqPage clickQuestion(int questionIndex) {
         By questionLocator = By.id(String.format(QUESTION_LOCATOR, questionIndex));
         driver.findElement(questionLocator).click();
+        return this;
     }
 
+    @Step("Получаем текст вопроса")
     public String getQuestionText(int questionIndex) {
         By questionLocator = By.id(String.format(QUESTION_LOCATOR, questionIndex));
         return driver.findElement(questionLocator).getText();
     }
 
+    @Step("Получаем текст ответа")
     public String getAnswerText(int answerIndex) {
         By answerLocator = By.id(String.format(ANSWER_LOCATOR, answerIndex));
         WebElement element = new WebDriverWait(driver, Duration.ofSeconds(30))
